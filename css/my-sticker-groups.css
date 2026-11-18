@@ -241,43 +241,27 @@
 .my-sticker-sub-modal .modal-buttons {
     margin-bottom: 4px;
 }
-/* 面板外壳：固定宽度、居中、给不透明背景，彻底盖住底下聊天背景 */
-.sticker-picker-popover#user-sticker-picker{
-    width:92vw !important;
-    max-width:360px !important;
-    left:50% !important;
-    right:auto !important;
-    transform:translateX(-50%) !important;
-    background:#fffdf9 !important;
-    box-sizing:border-box !important;
-    z-index:9999 !important;
-}
- 
-/* 关键：把内容区里所有"往右推"的力量归零，让它老老实实靠左铺满 */
 #combo-content-area{
     width:100% !important;
     max-width:100% !important;
     box-sizing:border-box !important;
     padding:8px !important;
+    display:grid !important;
+    grid-template-columns:repeat(4,1fr) !important;  /* 一行4个 */
+    gap:8px !important;
+    justify-content:start !important;
     text-align:left !important;
-    justify-content:flex-start !important;   /* 干掉 flex 靠右 */
-    align-content:flex-start !important;
-    direction:ltr !important;                /* 干掉从右往左 */
-    margin-left:0 !important;
-    margin-right:0 !important;
 }
- 
-/* 内容区里的每个表情格子：去掉自动右移的 margin，等宽铺满 */
 #combo-content-area > *{
-    margin-left:0 !important;
-    margin-right:0 !important;
-    float:none !important;                   /* 干掉浮动到右侧 */
-    max-width:100% !important;
-    box-sizing:border-box !important;
+    width:100% !important;
+    justify-self:stretch !important;
+    margin:0 !important;
+    aspect-ratio:1/1 !important;
+    overflow:hidden !important;
+    border-radius:8px !important;
+    background:#fff !important;
 }
 #combo-content-area img{
-    display:block !important;
-    max-width:100% !important;
-    height:auto !important;
-    object-fit:contain !important;
+    width:100% !important;height:100% !important;
+    object-fit:contain !important;display:block !important;
 }
