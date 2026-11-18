@@ -416,7 +416,7 @@ function renderComboMenu() {
     
     const contentArea = document.createElement('div');
     contentArea.id = 'combo-content-area';
-    contentArea.style.cssText = 'padding:10px; max-height:240px; overflow-y:auto;';
+     contentArea.style.cssText = 'padding:10px; width:100%; box-sizing:border-box; max-height:240px; overflow-y:auto;';
     
     content.appendChild(tabBar);
     content.appendChild(contentArea);
