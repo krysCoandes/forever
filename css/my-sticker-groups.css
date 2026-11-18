@@ -241,38 +241,48 @@
 .my-sticker-sub-modal .modal-buttons {
     margin-bottom: 4px;
 }
-/* ─── 表情包网格自适应修复样式 ─── */
-/* 解决面板高度限制导致的内容被“压扁”问题 */
+/* ─── 表情包网格终极修复样式 ─── */
+
+/* 1. 释放主容器高度，让它能自由伸缩 */
 #user-sticker-picker .combo-content-area {
-    height: auto !important;       /* 解除原有固定高度限制 */
-    max-height: 60vh;              /* 限制最大高度，防止面板过长 */
-    overflow-y: auto;              /* 超出部分自动出现滚动条 */
-    padding-bottom: 8px;
+    height: auto !important;
+    min-height: 300px; /* 给它一个最小高度，防止它缩成一团 */
+    max-height: 60vh;  /* 限制最大高度 */
+    overflow-y: auto;
+    padding-bottom: 12px;
 }
 
-/* 强制使用 flex 换行布局 */
+/* 2. 给网格加上固定内边距，让布局有弹性 */
 #user-sticker-picker .sticker-grid-view {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    padding: 8px;
+    padding: 10px;
+    gap: 12px; /* 调大间距，让每行排 3 个更容易 */
 }
 
-/* 确保每个表情包（包括加号按钮）都是标准的正方形 */
-#user-sticker-picker .sticker-grid-view > div,
-#user-sticker-picker .sticker-grid-add {
-    flex: 0 0 calc(25% - 6px); /* 一行4个 */
-    aspect-ratio: 1 / 1;       /* 强制1:1正方形比例 */
-    display: flex;
+/* 3. 核心修复：强制每个格子为正方形 */
+/* 使用 calc 精确计算宽度，减去间距保证一行刚好3个 */
+#user-sticker-picker .sticker-grid-view > div {
+    width: calc((100% - 24px) / 3) !important; /* 宽度锁死为总宽度的三分之一减去间距 */
+    height: calc((100% - 24px) / 3) !important; /* 高度和宽度一模一样，强制正方形 */
+    padding: 0 !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     border-radius: 8px;
+    overflow: hidden;
 }
 
-/* 让图片完整显示在正方形格子里 */
+/* 4. 让图片完整填满格子 */
 #user-sticker-picker .sticker-grid-view img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+/* 5. 针对加号按钮单独微调（让它更好看） */
+#user-sticker-picker .sticker-grid-add {
+    background-color: #f0f0f0;
+    color: #888;
+    font-size: 26px;
 }
