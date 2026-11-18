@@ -13953,3 +13953,21 @@ body #user-sticker-picker .empty-sticker-tip {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+// ==UserScript==
+// @name         表情包样式修复
+// @match        这里填你访问的网页地址
+// @grant        GM_addStyle
+// ==/UserScript==
+
+(function() {
+    'use strict';
+    
+    GM_addStyle(`
+        #user-sticker-picker .combo-content-area {
+            padding: 16px 16px 24px !important;
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 14px !important;
+        }
+    `);
+})();
