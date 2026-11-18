@@ -241,48 +241,42 @@
 .my-sticker-sub-modal .modal-buttons {
     margin-bottom: 4px;
 }
-/* ─── 表情包网格终极修复样式 ─── */
+/* ══════════════════════════════════════════
+   表情包终极强制正方形修复
+   ══════════════════════════════════════════ */
 
-/* 1. 释放主容器高度，让它能自由伸缩 */
+/* 1. 强制网格容器自适应高度，并允许滚动 */
 #user-sticker-picker .combo-content-area {
     height: auto !important;
-    min-height: 300px; /* 给它一个最小高度，防止它缩成一团 */
-    max-height: 60vh;  /* 限制最大高度 */
-    overflow-y: auto;
-    padding-bottom: 12px;
+    max-height: 55vh !important;
+    overflow-y: auto !important;
 }
 
-/* 2. 给网格加上固定内边距，让布局有弹性 */
+/* 2. 强制网格使用 Flex 布局，并设定严格的间距 */
 #user-sticker-picker .sticker-grid-view {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-    gap: 12px; /* 调大间距，让每行排 3 个更容易 */
-}
-
-/* 3. 核心修复：强制每个格子为正方形 */
-/* 使用 calc 精确计算宽度，减去间距保证一行刚好3个 */
-#user-sticker-picker .sticker-grid-view > div {
-    width: calc((100% - 24px) / 3) !important; /* 宽度锁死为总宽度的三分之一减去间距 */
-    height: calc((100% - 24px) / 3) !important; /* 高度和宽度一模一样，强制正方形 */
-    padding: 0 !important;
     display: flex !important;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    overflow: hidden;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    padding: 10px !important;
+    justify-content: flex-start !important;
 }
 
-/* 4. 让图片完整填满格子 */
+/* 3. 终极杀招：用百分比计算宽度，强制锁定宽高比！ */
+#user-sticker-picker .sticker-grid-view > div,
 #user-sticker-picker .sticker-grid-view img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 30% !important; /* 留点余地给间距，确保一行显示3个 */
+    height: 0 !important;
+    padding-top: 30% !important; /* 顶部内边距撑开高度，强制宽高比 1:1 */
+    overflow: hidden !important;
+    display: block !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
 }
 
-/* 5. 针对加号按钮单独微调（让它更好看） */
-#user-sticker-picker .sticker-grid-add {
-    background-color: #f0f0f0;
-    color: #888;
-    font-size: 26px;
+/* 4. 让里面的图片完全填满并适应正方形格子 */
+#user-sticker-picker .sticker-grid-view img {
+    width: 100% !important;
+    height: 100% !important;
+    padding-top: 0 !important; /* 抵消父元素的 padding-top */
+    object-fit: cover !important;
 }
