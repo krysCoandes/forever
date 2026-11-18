@@ -242,41 +242,44 @@
     margin-bottom: 4px;
 }
 /* ══════════════════════════════════════════
-   表情包终极强制正方形修复
+   表情包修复（保留完整图片版）
    ══════════════════════════════════════════ */
 
-/* 1. 强制网格容器自适应高度，并允许滚动 */
+/* 1. 容器自适应高度，并允许滚动 */
 #user-sticker-picker .combo-content-area {
     height: auto !important;
     max-height: 55vh !important;
     overflow-y: auto !important;
+    padding-bottom: 20px !important; /* 防止底部被遮挡 */
 }
 
-/* 2. 强制网格使用 Flex 布局，并设定严格的间距 */
+/* 2. 网格布局 */
 #user-sticker-picker .sticker-grid-view {
     display: flex !important;
     flex-wrap: wrap !important;
-    gap: 10px !important;
-    padding: 10px !important;
+    gap: 12px !important;
+    padding: 12px !important;
     justify-content: flex-start !important;
 }
 
-/* 3. 终极杀招：用百分比计算宽度，强制锁定宽高比！ */
-#user-sticker-picker .sticker-grid-view > div,
-#user-sticker-picker .sticker-grid-view img {
-    width: 30% !important; /* 留点余地给间距，确保一行显示3个 */
-    height: 0 !important;
-    padding-top: 30% !important; /* 顶部内边距撑开高度，强制宽高比 1:1 */
-    overflow: hidden !important;
-    display: block !important;
+/* 3. 每个格子：保留图片完整比例，不裁切 */
+#user-sticker-picker .sticker-grid-view > div {
+    width: calc(25% - 12px) !important; /* 一行 4 个，间距 12px */
+    aspect-ratio: 1 / 1 !important;     /* 保持格子本身是正方形 */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.03); /* 轻微底色 */
     border-radius: 8px !important;
-    box-sizing: border-box !important;
+    overflow: hidden !important;
 }
 
-/* 4. 让里面的图片完全填满并适应正方形格子 */
+/* 4. 核心修复：让图片完整显示在格子里，不被拉伸裁切 */
 #user-sticker-picker .sticker-grid-view img {
     width: 100% !important;
     height: 100% !important;
-    padding-top: 0 !important; /* 抵消父元素的 padding-top */
-    object-fit: cover !important;
+    object-fit: contain !important; /* 关键：完整显示图片，不裁切 */
+    padding: 4px !important;        /* 给图片周围留一点呼吸空间 */
+    box-sizing: border-box !important;
+    background-color: transparent;
 }
