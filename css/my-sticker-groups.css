@@ -241,27 +241,3 @@
 .my-sticker-sub-modal .modal-buttons {
     margin-bottom: 4px;
 }
-#combo-content-area{
-    width:100% !important;
-    max-width:100% !important;
-    box-sizing:border-box !important;
-    padding:8px !important;
-    display:grid !important;
-    grid-template-columns:repeat(4,1fr) !important;  /* 一行4个 */
-    gap:8px !important;
-    justify-content:start !important;
-    text-align:left !important;
-}
-#combo-content-area > *{
-    width:100% !important;
-    justify-self:stretch !important;
-    margin:0 !important;
-    aspect-ratio:1/1 !important;
-    overflow:hidden !important;
-    border-radius:8px !important;
-    background:#fff !important;
-}
-#combo-content-area img{
-    width:100% !important;height:100% !important;
-    object-fit:contain !important;display:block !important;
-}
